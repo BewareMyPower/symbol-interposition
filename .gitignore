@@ -1,0 +1,5 @@
+# A common used CMake build directory
+build/
+
+# clangd
+compile_flags.txt

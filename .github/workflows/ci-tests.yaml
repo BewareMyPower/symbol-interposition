@@ -1,0 +1,36 @@
+name: Validation
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  test-default:
+    name: Test default build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: |
+        cmake -B build
+        cmake --build build
+        ./build/main 0
+
+  test-symbolic:
+    name: Test default build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: |
+        cmake -B build
+        cmake --build build -DEXTRA_LINK_OPTIONS="-Wl,-Bsymbolic"
+        ./build/main 12346
