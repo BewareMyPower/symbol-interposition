@@ -2,6 +2,7 @@
 extern "C" {
 #endif
 
+int foo();
 int bar();
 
 #ifdef __cplusplus
